@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RoaV3zXExCbtYWMAccFrOxFoNQ4fs92+mT/xqMMYem934DaW3AaY6NW3u+4vfK72S+bYwTNg6qE1VEMQNxyfBg==",
+  "dgSpecHash": "ZsGabNlwwZ276OgbEEAYyfXE51Ye5T8gD7dwvtM3AWE3GwN2XtWxJIcbAg9C6lEWZSM22M4w9VYTTHFeTYl3iA==",
   "success": true,
-  "projectFilePath": "D:\\Source Code SE 1\\PRN192\\QuanLyPhongBan\\QuanLyPhongBan.csproj",
+  "projectFilePath": "D:\\Source Code SE 1\\PRN192\\Assigment\\QuanLyPhongBan\\QuanLyPhongBan.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.6\\microsoft.aspnetcore.cryptography.internal.5.0.6.nupkg.sha512",

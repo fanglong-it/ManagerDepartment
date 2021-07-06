@@ -7467,11 +7467,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Source Code SE 1\\PRN192\\QuanLyPhongBan\\QuanLyPhongBan.csproj",
+      "projectUniqueName": "D:\\Source Code SE 1\\PRN192\\Assigment\\QuanLyPhongBan\\QuanLyPhongBan.csproj",
       "projectName": "QuanLyPhongBan",
-      "projectPath": "D:\\Source Code SE 1\\PRN192\\QuanLyPhongBan\\QuanLyPhongBan.csproj",
+      "projectPath": "D:\\Source Code SE 1\\PRN192\\Assigment\\QuanLyPhongBan\\QuanLyPhongBan.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Source Code SE 1\\PRN192\\QuanLyPhongBan\\obj\\",
+      "outputPath": "D:\\Source Code SE 1\\PRN192\\Assigment\\QuanLyPhongBan\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
