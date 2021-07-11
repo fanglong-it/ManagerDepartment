@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using QuanLyPhongBan.Areas.Identity.Data;
+using QuanLyPhongBan.Entities;
 
 namespace QuanLyPhongBan.Data
 {
@@ -16,6 +17,9 @@ namespace QuanLyPhongBan.Data
         {
         }
 
+
+        public DbSet<PhongBan> PhongBans { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -25,6 +29,12 @@ namespace QuanLyPhongBan.Data
             this.SeedRoles(builder);
             this.SeedUser(builder);
             this.SeedUserToRole(builder);
+
+            builder.Entity<PhongBan>().HasData(
+                new PhongBan() { IdPhongban = 1, TenPhongBan = "Lab", HoSo = "HoSo" },
+                new PhongBan() { IdPhongban = 2, TenPhongBan = "NhanSu", HoSo = "HoSo" },
+                new PhongBan() { IdPhongban = 3, TenPhongBan = "KinhDoanh", HoSo = "HoSo" }
+                );
         }
 
 
@@ -55,6 +65,7 @@ namespace QuanLyPhongBan.Data
                 NormalizedEmail = "admin@abc.com",
                 LockoutEnabled = false,
                 PhoneNumber = "1234567890",
+                IdPhongban = 1,
 
                 SecurityStamp = Guid.NewGuid().ToString(),
 

@@ -10,8 +10,8 @@ using QuanLyPhongBan.Data;
 namespace QuanLyPhongBan.Migrations
 {
     [DbContext(typeof(QuanLyPhongBanContext))]
-    [Migration("20210705142607_createDBQuanLyPhongBan")]
-    partial class createDBQuanLyPhongBan
+    [Migration("20210706161431_create PhongBan")]
+    partial class createPhongBan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,7 +51,7 @@ namespace QuanLyPhongBan.Migrations
                         new
                         {
                             Id = "fab4fac1-c546-41de-aebc-a14da6895711",
-                            ConcurrencyStamp = "e9d0bd7b-7f49-4323-84e6-97cb9ece6d3d",
+                            ConcurrencyStamp = "9e6d1fb9-533c-4ab4-97c1-61352684c30c",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -191,6 +191,9 @@ namespace QuanLyPhongBan.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("IdPhongban")
+                        .HasColumnType("int");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -226,6 +229,8 @@ namespace QuanLyPhongBan.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdPhongban");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -241,18 +246,57 @@ namespace QuanLyPhongBan.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8c982a7e-ae8c-4818-be54-4abd42d98fc3",
+                            ConcurrencyStamp = "46ab75c0-b62e-4983-a955-282f1215341f",
                             Email = "admin@abc.com",
                             EmailConfirmed = true,
+                            IdPhongban = 1,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@abc.com",
                             NormalizedUserName = "admin@abc.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGynV9oJiEDm7f64cHwcBTf6bJbP4mG58hpsKlpkgD7vDIsJBBNcDpk6TDgSPLtOcA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBPv1JSbQ3ydpOIxgiZS7dlzzQBMtj/xSuVWcx/qV+AXaE3BtjsIOtbYztWOGxhSMw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "213cfa25-999c-47cc-9694-8b50fe30cb0a",
+                            SecurityStamp = "f82e2924-fda4-413e-93b5-8656e83af796",
                             TwoFactorEnabled = false,
                             UserName = "admin@abc.com"
+                        });
+                });
+
+            modelBuilder.Entity("QuanLyPhongBan.Entities.PhongBan", b =>
+                {
+                    b.Property<int>("IdPhongban")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HoSo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenPhongBan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdPhongban");
+
+                    b.ToTable("PhongBans");
+
+                    b.HasData(
+                        new
+                        {
+                            IdPhongban = 1,
+                            HoSo = "HoSo",
+                            TenPhongBan = "Lab"
+                        },
+                        new
+                        {
+                            IdPhongban = 2,
+                            HoSo = "HoSo",
+                            TenPhongBan = "NhanSu"
+                        },
+                        new
+                        {
+                            IdPhongban = 3,
+                            HoSo = "HoSo",
+                            TenPhongBan = "KinhDoanh"
                         });
                 });
 
@@ -305,6 +349,22 @@ namespace QuanLyPhongBan.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("QuanLyPhongBan.Areas.Identity.Data.QuanLyPhongBanUser", b =>
+                {
+                    b.HasOne("QuanLyPhongBan.Entities.PhongBan", "phongBan")
+                        .WithMany("quanLyPhongBanUsers")
+                        .HasForeignKey("IdPhongban")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("phongBan");
+                });
+
+            modelBuilder.Entity("QuanLyPhongBan.Entities.PhongBan", b =>
+                {
+                    b.Navigation("quanLyPhongBanUsers");
                 });
 #pragma warning restore 612, 618
         }

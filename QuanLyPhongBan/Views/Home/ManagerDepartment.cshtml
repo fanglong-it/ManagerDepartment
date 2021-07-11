@@ -1,0 +1,47 @@
+﻿@model IEnumerable<QuanLyPhongBan.Entities.PhongBan>
+
+@{
+    ViewData["Title"] = "ManagerDepartment";
+}
+
+<h1>ManagerDepartment</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPhongban)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhongBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoSo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPhongban)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhongBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoSo)
+            </td>
+            <td>
+                @Html.ActionLink("EditDepartment", "EditDepartment", new { id = item.IdPhongban }); |
+                @Html.ActionLink("DetailUserInDepartment", "DetailUserInDepartment", new { id = item.IdPhongban }); |
+                @Html.ActionLink("DeleteDepartment", "DeleteDepartment", new { id = item.IdPhongban });
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

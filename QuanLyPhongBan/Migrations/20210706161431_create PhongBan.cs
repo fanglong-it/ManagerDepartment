@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuanLyPhongBan.Migrations
 {
-    public partial class createDBQuanLyPhongBan : Migration
+    public partial class createPhongBan : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,28 +22,17 @@ namespace QuanLyPhongBan.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "PhongBans",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    IdPhongban = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenPhongBan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoSo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_PhongBans", x => x.IdPhongban);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,6 +53,38 @@ namespace QuanLyPhongBan.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdPhongban = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_PhongBans_IdPhongban",
+                        column: x => x.IdPhongban,
+                        principalTable: "PhongBans",
+                        principalColumn: "IdPhongban",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -155,12 +176,22 @@ namespace QuanLyPhongBan.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "fab4fac1-c546-41de-aebc-a14da6895711", "e9d0bd7b-7f49-4323-84e6-97cb9ece6d3d", "Admin", "Admin" });
+                values: new object[] { "fab4fac1-c546-41de-aebc-a14da6895711", "9e6d1fb9-533c-4ab4-97c1-61352684c30c", "Admin", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "PhongBans",
+                columns: new[] { "IdPhongban", "HoSo", "TenPhongBan" },
+                values: new object[,]
+                {
+                    { 1, "HoSo", "Lab" },
+                    { 2, "HoSo", "NhanSu" },
+                    { 3, "HoSo", "KinhDoanh" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "8c982a7e-ae8c-4818-be54-4abd42d98fc3", "admin@abc.com", true, false, null, "admin@abc.com", "admin@abc.com", "AQAAAAEAACcQAAAAEGynV9oJiEDm7f64cHwcBTf6bJbP4mG58hpsKlpkgD7vDIsJBBNcDpk6TDgSPLtOcA==", "1234567890", false, "213cfa25-999c-47cc-9694-8b50fe30cb0a", false, "admin@abc.com" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "IdPhongban", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "46ab75c0-b62e-4983-a955-282f1215341f", "admin@abc.com", true, 1, false, null, "admin@abc.com", "admin@abc.com", "AQAAAAEAACcQAAAAEBPv1JSbQ3ydpOIxgiZS7dlzzQBMtj/xSuVWcx/qV+AXaE3BtjsIOtbYztWOGxhSMw==", "1234567890", false, "f82e2924-fda4-413e-93b5-8656e83af796", false, "admin@abc.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -200,6 +231,11 @@ namespace QuanLyPhongBan.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_IdPhongban",
+                table: "AspNetUsers",
+                column: "IdPhongban");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -229,6 +265,9 @@ namespace QuanLyPhongBan.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "PhongBans");
         }
     }
 }
